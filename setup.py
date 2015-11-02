@@ -8,7 +8,7 @@ except ImportError:
     from distutils.core import setup
 import os
 
-with open('eat_me/__init__.py', 'r') as fd:
+with open('eatme/__init__.py', 'r') as fd:
     PACKAGE_VERSION = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
                                 fd.read(), re.MULTILINE).group(1)
 
@@ -39,11 +39,11 @@ setup(
     url='https://hiconversion.ru/',
     # long_description=PACKAGE_LONG_DESCRIPTION,
     packages=[
-        'eat_me',
+        'eatme',
     ],
     entry_points={
         'console_scripts': [
-            'eat_me = eat_me:EatMe.run',
+            'eatme = eatme:EatMe.run',
         ],
     },
     install_requires=PACKAGE_INSTALL_REQUIRES,

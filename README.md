@@ -4,12 +4,12 @@
 
 ## Установка ##
 ```
-pip install eat_me
+pip install eatme
 ```
 
 ## Запуск ##
 ```
-eat_me COMMAND
+eatme COMMAND
 ```
 
 Дополнительные ключи:

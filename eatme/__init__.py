@@ -95,7 +95,7 @@ def status(path, branch=None, new_branch=True):
 
 
 class EatMe(cli.Application):
-    PROGNAME = 'eat_me'
+    PROGNAME = 'eatme'
     VERSION = __version__
     verbose = cli.Flag(["v", "verbose"])
 
