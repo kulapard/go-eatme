@@ -8,14 +8,16 @@ from plumbum.commands.processes import ProcessExecutionError
 
 __author__ = 'Taras Drapalyuk <taras@drapalyuk.com>'
 __date__ = '02.11.2015'
-__version__ = '0.0.5'
+__version__ = '0.0.6'
 
 
 def get_repos(start_path='.'):
-    for file_name in os.listdir(start_path) + [start_path]:
-        if os.path.isdir(file_name) and not file_name.startswith('..'):
-            if os.path.exists(os.path.join(file_name, '.hg')):
-                yield file_name
+    for dir_path, subdir_list, file_list in os.walk(start_path):
+        if '.hg' in subdir_list:
+            yield dir_path
+
+        # Удаляем скрытые директории из списка, чтобы не проходить по ним
+        subdir_list[:] = [d for d in subdir_list if not d[0] == '.']
 
 
 def run_for_all_repos(func, start_path='.'):
