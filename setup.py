@@ -35,7 +35,7 @@ setup(
     version=PACKAGE_VERSION,
     author='Taras Drapalyuk',
     author_email='taras@drapalyuk.com',
-    description='HiC EatMe Utility',
+    description='EatMe Utility',
     url='https://hiconversion.ru/',
     # long_description=PACKAGE_LONG_DESCRIPTION,
     packages=[
