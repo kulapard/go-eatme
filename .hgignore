@@ -1,0 +1,9 @@
+.idea/
+.DS_Store
+.pyc
+.log$
+.orig
+.egg-info/
+.coverage
+.tox/
+cover/
