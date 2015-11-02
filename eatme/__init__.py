@@ -8,7 +8,7 @@ from plumbum.commands.processes import ProcessExecutionError
 
 __author__ = 'Taras Drapalyuk <taras@drapalyuk.com>'
 __date__ = '02.11.2015'
-__version__ = '0.0.12'
+__version__ = '0.0.13'
 
 
 def get_repos(start_path='.'):
@@ -77,7 +77,9 @@ def push(path, branch=None, new_branch=True):
     with colors.yellow:
         print(hg_push)
 
-    print(hg_push())
+    # Игнорируем ошибки:
+    # 1 - no changes found
+    print(hg_push(retcode=[1]))
 
 
 def status(path):
