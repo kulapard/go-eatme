@@ -36,8 +36,8 @@ setup(
     author='Taras Drapalyuk',
     author_email='taras@drapalyuk.com',
     description='EatMe Utility',
-    url='https://bitbucket.org/KulaPard/eatme/admin',
-    # long_description=PACKAGE_LONG_DESCRIPTION,
+    url='https://bitbucket.org/KulaPard/eatme',
+    long_description=PACKAGE_LONG_DESCRIPTION,
     packages=[
         'eatme',
     ],
