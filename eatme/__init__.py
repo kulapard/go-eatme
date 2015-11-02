@@ -80,7 +80,7 @@ def push(path, branch=None, new_branch=True):
     print(hg_push())
 
 
-def status(path, branch=None, new_branch=True):
+def status(path):
     """hg status"""
     hg = local['hg']
     hg = hg['--repository', path]
