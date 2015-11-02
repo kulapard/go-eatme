@@ -8,7 +8,7 @@ from plumbum.commands.processes import ProcessExecutionError
 
 __author__ = 'Taras Drapalyuk <taras@drapalyuk.com>'
 __date__ = '02.11.2015'
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 
 def get_repos(start_path='.'):
@@ -100,7 +100,6 @@ class EatMe(cli.Application):
     verbose = cli.Flag(["v", "verbose"])
 
     _branch = None
-    _clean = False
 
     def main(self, *args):
         if args:
@@ -113,41 +112,28 @@ class EatMe(cli.Application):
 
 @EatMe.subcommand("push")
 class Push(cli.Application):
-    _clean = False
-    _branch = None
+    branch = None
 
-    @cli.switch(["-C", "--clean"])
-    def allow_clean(self):
-        """hg update --clean"""
-        self._clean = True
-
-    @cli.switch(["-b", "--branch"])
+    @cli.switch(["-b", "--branch"], help="hg update --rev BRANCH")
     def set_branch(self, branch):
-        """hg update --rev BRANCH"""
-        self._branch = branch
+        self.branch = branch
 
     def main(self):
-        hg_push = partial(push, branch=self._branch, clean=self._clean)
+        hg_push = partial(push, branch=self.branch, clean=self.clean)
         run_for_all_repos(hg_push)
 
 
 @EatMe.subcommand("update")
 class Update(cli.Application):
-    _clean = False
-    _branch = None
+    clean = cli.Flag(["C", "clean"], help="hg update --clean")
+    branch = None
 
-    @cli.switch(["-C", "--clean"])
-    def allow_clean(self):
-        """hg update --clean"""
-        self._clean = True
-
-    @cli.switch(["-b", "--branch"])
+    @cli.switch(["-b", "--branch"], help="hg update --rev BRANCH")
     def set_branch(self, branch):
-        """hg update --rev BRANCH"""
-        self._branch = branch
+        self.branch = branch
 
     def main(self):
-        hg_pull_update = partial(pull_update, branch=self._branch, clean=self._clean)
+        hg_pull_update = partial(pull_update, branch=self.branch, clean=self.clean)
         run_for_all_repos(hg_pull_update)
 
 
