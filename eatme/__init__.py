@@ -8,7 +8,7 @@ from plumbum.commands.processes import ProcessExecutionError
 
 __author__ = 'Taras Drapalyuk <taras@drapalyuk.com>'
 __date__ = '02.11.2015'
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 
 def get_repos(start_path='.'):
@@ -110,6 +110,7 @@ class EatMe(cli.Application):
 
 @EatMe.subcommand("push")
 class Push(cli.Application):
+    new_branch = cli.Flag(["new-branch"], help="hg push --new-branch")
     branch = None
 
     @cli.switch(["-b", "--branch"], help="hg update --rev BRANCH")
@@ -117,7 +118,7 @@ class Push(cli.Application):
         self.branch = branch
 
     def main(self):
-        hg_push = partial(push, branch=self.branch, clean=self.clean)
+        hg_push = partial(push, branch=self.branch, new_branch=self.new_branch)
         run_for_all_repos(hg_push)
 
 
