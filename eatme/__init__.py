@@ -144,35 +144,5 @@ class Status(cli.Application):
         run_for_all_repos(status)
 
 
-def run_cli():
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-b', '--branch', help=u'branch name')
-    parser.add_argument('-C', '--clean', action='store_true', default=False,
-                        help=u'discard local changes (no backup). Can only be used with branch option (-b)')
-    parser.add_argument('--push', action='store_true', default=False,
-                        help=u'hg push')
-    parser.add_argument('--update', action='store_true', default=False,
-                        help=u'hg pull + hg update')
-
-    parser.add_argument('--status', action='store_true', default=False,
-                        help=u'hg status')
-
-    args = parser.parse_args()
-
-    if args.update:
-        hg_pull_update = partial(pull_update, branch=args.branch, clean=args.clean)
-        run_for_all_repos(hg_pull_update)
-
-    if args.push:
-        hg_push = partial(push, branch=args.branch, clean=args.clean)
-        run_for_all_repos(hg_push)
-
-    if args.status:
-        run_for_all_repos(status)
-
-
 if __name__ == '__main__':
     EatMe.run()
-    # run_cli()
