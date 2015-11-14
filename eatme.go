@@ -1,16 +1,16 @@
 package main
 
 import (
-	"path/filepath"
 	"os"
-	"flag"
-	"fmt"
 	"os/exec"
+	"path/filepath"
+	"fmt"
 	"time"
-	"github.com/fatih/color"
 	"bytes"
 	"sync"
 	"strings"
+	"github.com/spf13/cobra"
+	"github.com/fatih/color"
 )
 
 
@@ -71,7 +71,7 @@ func hgUpdate(path string, wg *sync.WaitGroup) {
 	wg.Done()
 }
 
-func hgPullUpdate(path string, branch string, wg *sync.WaitGroup) {
+func hgPullUpdate(path string, wg *sync.WaitGroup, branch string) {
 	runHgCommand("pull", path)
 	if branch != "" {
 		runHgCommand("update", path, "--rev", branch)
@@ -82,23 +82,48 @@ func hgPullUpdate(path string, branch string, wg *sync.WaitGroup) {
 	wg.Done()
 }
 
-
-func main() {
+func runCommand(){
 	t := time.Now()
 	wg := new(sync.WaitGroup)
-
-	flag.Parse()
-	branch := flag.Arg(0)
 	c := make(chan string)
+	count := 0
 
 	go findRepo(".", ".hg", c)
 
-	count := 0
 	for path := range c {
 		wg.Add(1)
-		go hgPullUpdate(path, branch, wg)
+		go hgPullUpdate(path, wg, "")
 		count += 1
 	}
+
 	wg.Wait()
 	color.Cyan("Done %d repos in %s", count, time.Since(t))
+}
+
+
+func main() {
+	var branch string
+
+	var EatMeCmd = &cobra.Command{
+		Use: "go-eatme",
+		Short: "pull + update",
+		Run: func(cmd *cobra.Command, args []string) {
+			runCommand()
+		},
+	}
+	var cmdUpdate = &cobra.Command{
+		Use:   "update",
+		Short: "only update",
+		Long:  ``,
+		Run: func(cmd *cobra.Command, args []string) {
+			runCommand()
+		},
+	}
+
+	EatMeCmd.Flags().StringVarP(&branch, "branch", "b", "", "Branch or Tag name")
+	cmdUpdate.Flags().StringVarP(&branch, "branch", "b", "", "Branch or Tag name")
+
+	EatMeCmd.AddCommand(cmdUpdate)
+	EatMeCmd.Execute()
+
 }
