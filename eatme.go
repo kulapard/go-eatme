@@ -56,22 +56,35 @@ func runHgCommand(hg_cmd string, path string, args ...string) {
 	fmt.Println(out.String())
 }
 
-func hgStatus(path string, wg *sync.WaitGroup) {
+func hgStatus(path string, wg *sync.WaitGroup, branch string, new_branch bool) {
 	runHgCommand("status", path)
 	wg.Done()
 }
 
-func hgPull(path string, wg *sync.WaitGroup) {
+func hgPull(path string, wg *sync.WaitGroup, branch string, new_branch bool) {
 	runHgCommand("pull", path)
 	wg.Done()
 }
 
-func hgUpdate(path string, wg *sync.WaitGroup) {
-	runHgCommand("update", path)
+func hgPush(path string, wg *sync.WaitGroup, branch string, new_branch bool) {
+	if new_branch{
+		runHgCommand("push", path, "--new-branch")
+	}else {
+		runHgCommand("push", path)
+	}
 	wg.Done()
 }
 
-func hgPullUpdate(path string, wg *sync.WaitGroup, branch string) {
+func hgUpdate(path string, wg *sync.WaitGroup, branch string, new_branch bool) {
+	if branch != "" {
+		runHgCommand("update", path, "--rev", branch)
+	} else {
+		runHgCommand("update", path)
+	}
+	wg.Done()
+}
+
+func hgPullUpdate(path string, wg *sync.WaitGroup, branch string, new_branch bool) {
 	runHgCommand("pull", path)
 	if branch != "" {
 		runHgCommand("update", path, "--rev", branch)
@@ -82,7 +95,7 @@ func hgPullUpdate(path string, wg *sync.WaitGroup, branch string) {
 	wg.Done()
 }
 
-func runCommand(){
+func runCommand(cmdFunc func(path string, wg *sync.WaitGroup, branch string, new_branch bool), branch string, new_branch bool){
 	t := time.Now()
 	wg := new(sync.WaitGroup)
 	c := make(chan string)
@@ -92,7 +105,7 @@ func runCommand(){
 
 	for path := range c {
 		wg.Add(1)
-		go hgPullUpdate(path, wg, "")
+		go cmdFunc(path, wg, branch, new_branch)
 		count += 1
 	}
 
@@ -103,12 +116,13 @@ func runCommand(){
 
 func main() {
 	var branch string
+	var new_branch bool
 
 	var EatMeCmd = &cobra.Command{
-		Use: "go-eatme",
+		Use: "eatme",
 		Short: "pull + update",
 		Run: func(cmd *cobra.Command, args []string) {
-			runCommand()
+			runCommand(hgPullUpdate, branch, new_branch)
 		},
 	}
 	var cmdUpdate = &cobra.Command{
@@ -116,14 +130,32 @@ func main() {
 		Short: "only update",
 		Long:  ``,
 		Run: func(cmd *cobra.Command, args []string) {
-			runCommand()
+			runCommand(hgUpdate, branch, new_branch)
+		},
+	}
+	var cmdPull = &cobra.Command{
+		Use:   "pull",
+		Short: "only pull",
+		Long:  ``,
+		Run: func(cmd *cobra.Command, args []string) {
+			runCommand(hgPull, branch, new_branch)
+		},
+	}
+	var cmdPush = &cobra.Command{
+		Use:   "push",
+		Short: "only push",
+		Long:  ``,
+		Run: func(cmd *cobra.Command, args []string) {
+			runCommand(hgPush, branch, new_branch)
 		},
 	}
 
-	EatMeCmd.Flags().StringVarP(&branch, "branch", "b", "", "Branch or Tag name")
-	cmdUpdate.Flags().StringVarP(&branch, "branch", "b", "", "Branch or Tag name")
+	EatMeCmd.PersistentFlags().StringVarP(&branch, "branch", "b", "", "Branch or Tag name")
+	cmdPush.Flags().BoolVarP(&new_branch, "new-branch", "n", false, "Create remote new branch")
 
 	EatMeCmd.AddCommand(cmdUpdate)
+	EatMeCmd.AddCommand(cmdPull)
+	EatMeCmd.AddCommand(cmdPush)
 	EatMeCmd.Execute()
 
 }
