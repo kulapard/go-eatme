@@ -1,4 +1,4 @@
-VERSION = 1.0.0
+VERSION=$(TRAVIS_TAG)
 NAME=eatme
 
 all: mac64 linux64 win64

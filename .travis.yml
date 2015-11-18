@@ -5,9 +5,16 @@ go:
 - 1.5.1
 - tip
 
-before_install:
-- go get github.com/spf13/cobra
-- go get github.com/fatih/color
+deploy:
+  provider: tip
+  api_key: "GITHUB OAUTH TOKEN"
+  file:
+    - "eatme_$(TRAVIS_TAG)_darwin_amd64.tar.gz"
+    - "eatme_$(TRAVIS_TAG)_linux_amd64.tar.gz"
+    - "eatme_$(TRAVIS_TAG)_windows_amd64.tar.gz"
+  skip_cleanup: true
+  on:
+    tags: true
 
 notifications:
   email:
