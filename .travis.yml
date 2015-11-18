@@ -6,18 +6,3 @@ go:
 
 before_install:
 - go get -t ./...
-
-deploy:
-  provider: tip
-  api_key: "GITHUB OAUTH TOKEN"
-  file:
-    - "eatme_$TRAVIS_TAG_darwin_amd64.tar.gz"
-    - "eatme_$TRAVIS_TAG_linux_amd64.tar.gz"
-    - "eatme_$TRAVIS_TAG_windows_amd64.tar.gz"
-  skip_cleanup: true
-  on:
-    tags: true
-
-notifications:
-  email:
-  - taras@drapalyuk.com
