@@ -1,9 +1,11 @@
-language: go
 sudo: false
+language: go
 
 go:
 - 1.5.1
-- tip
+
+before_install:
+- go get -t ./...
 
 deploy:
   provider: tip
