@@ -11,9 +11,9 @@ deploy:
   provider: test
   api_key: "GITHUB OAUTH TOKEN"
   file:
-    - "eatme_$(TRAVIS_TAG)_darwin_amd64.tar.gz"
-    - "eatme_$(TRAVIS_TAG)_linux_amd64.tar.gz"
-    - "eatme_$(TRAVIS_TAG)_windows_amd64.tar.gz"
+    - "eatme_$TRAVIS_TAG_darwin_amd64.tar.gz"
+    - "eatme_$TRAVIS_TAG_linux_amd64.tar.gz"
+    - "eatme_$TRAVIS_TAG_windows_amd64.tar.gz"
   skip_cleanup: true
   on:
     tags: true
