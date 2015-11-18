@@ -8,7 +8,7 @@ before_install:
 - go get -t ./...
 
 deploy:
-  provider: test
+  provider: tip
   api_key: "GITHUB OAUTH TOKEN"
   file:
     - "eatme_$TRAVIS_TAG_darwin_amd64.tar.gz"
