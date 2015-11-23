@@ -19,6 +19,7 @@ func main() {
 			pull_cmd.RunForAll()
 
 			update_cmd := &hg.HGCommand{Cmd: "update"}
+			update_cmd.SetBranch(branch)
 			update_cmd.SetClean(clean)
 			update_cmd.RunForAll()
 		},
@@ -28,6 +29,7 @@ func main() {
 		Short: "only update",
 		Run: func(cmd *cobra.Command, args []string) {
 			update_cmd := &hg.HGCommand{Cmd: "update"}
+			update_cmd.SetBranch(branch)
 			update_cmd.SetClean(clean)
 			update_cmd.RunForAll()
 		},
