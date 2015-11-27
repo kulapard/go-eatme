@@ -4,7 +4,7 @@ go:
   - 1.5.1
   - tip
 
-before_install:
+before_script:
   - go get -t ./...
 
 install:
