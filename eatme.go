@@ -1,10 +1,9 @@
 package main
 
 import (
-	"github.com/spf13/cobra"
+	"github.com/kulapard/eatme/Godeps/_workspace/src/github.com/spf13/cobra"
 	"github.com/kulapard/eatme/hg"
 )
-
 
 func main() {
 	var branch string
@@ -12,7 +11,7 @@ func main() {
 	var clean bool
 
 	var EatMeCmd = &cobra.Command{
-		Use: "eatme",
+		Use:   "eatme",
 		Short: "pull + update",
 		Run: func(cmd *cobra.Command, args []string) {
 			pull_cmd := &hg.HGCommand{Cmd: "pull"}
