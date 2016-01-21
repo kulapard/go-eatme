@@ -1,15 +1,16 @@
 package hg
 
 import (
+	"bytes"
+	"fmt"
+	"github.com/fatih/color"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"fmt"
-	"time"
-	"bytes"
-	"sync"
+	"regexp"
 	"strings"
-	"github.com/fatih/color"
+	"sync"
+	"time"
 )
 
 type HGCommand struct {
@@ -32,6 +33,12 @@ func findRepo(root string, sign string, path_chan chan string) {
 				color.Red(err.Error())
 				return nil
 			}
+			// ignore hidden directories
+			matched, _ := regexp.MatchString("/\\.", abs_dir)
+			if matched {
+				return nil
+			}
+
 			path_chan <- abs_dir
 		}
 		return nil
@@ -39,7 +46,6 @@ func findRepo(root string, sign string, path_chan chan string) {
 
 	filepath.Walk(root, visit)
 }
-
 
 func (cmd *HGCommand) Run(path string, wg *sync.WaitGroup) {
 	defer wg.Done()
