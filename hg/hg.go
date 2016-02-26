@@ -19,8 +19,8 @@ type HGCommand struct {
 	args []string
 }
 
-func findRepo(root string, sign string, path_chan chan string) {
-	defer close(path_chan)
+func findRepo(root string, sign string, pathChan chan string) {
+	defer close(pathChan)
 
 	visit := func(path string, info os.FileInfo, err error) error {
 		if !info.IsDir() {
@@ -29,18 +29,18 @@ func findRepo(root string, sign string, path_chan chan string) {
 
 		if info.Name() == sign && info.IsDir() {
 			dir, _ := filepath.Split(path)
-			abs_dir, err := filepath.Abs(dir)
+			absDir, err := filepath.Abs(dir)
 			if err != nil {
 				color.Red(err.Error())
 				return nil
 			}
 			// ignore hidden directories
-			matched, _ := regexp.MatchString("/\\.", abs_dir)
+			matched, _ := regexp.MatchString("/\\.", absDir)
 			if matched {
 				return nil
 			}
 
-			path_chan <- abs_dir
+			pathChan <- absDir
 		}
 		return nil
 	}
@@ -51,12 +51,12 @@ func findRepo(root string, sign string, path_chan chan string) {
 func (cmd *HGCommand) Run(path string, wg *sync.WaitGroup) {
 	defer wg.Done()
 	args := append([]string{cmd.Cmd, "--repository", path}, cmd.args...)
-	system_cmd := exec.Command("hg", args...)
+	systemCmd := exec.Command("hg", args...)
 
 	var out bytes.Buffer
-	system_cmd.Stdout = &out
+	systemCmd.Stdout = &out
 
-	err := system_cmd.Run()
+	err := systemCmd.Run()
 
 	color.Green(path)
 	color.Yellow("hg %s", strings.Join(args, " "))
@@ -70,12 +70,12 @@ func (cmd *HGCommand) Run(path string, wg *sync.WaitGroup) {
 func (cmd *HGCommand) RunForAll() {
 	t := time.Now()
 	wg := new(sync.WaitGroup)
-	path_chan := make(chan string)
+	pathChan := make(chan string)
 	count := 0
 
-	go findRepo(".", ".hg", path_chan)
+	go findRepo(".", ".hg", pathChan)
 
-	for path := range path_chan {
+	for path := range pathChan {
 		wg.Add(1)
 		go cmd.Run(path, wg)
 		count += 1
@@ -90,8 +90,8 @@ func (cmd *HGCommand) SetBranch(branch string) {
 		cmd.args = append(cmd.args, "--rev", branch)
 	}
 }
-func (cmd *HGCommand) SetNewBranch(new_branch bool) {
-	if new_branch {
+func (cmd *HGCommand) SetNewBranch(newBranch bool) {
+	if newBranch {
 		cmd.args = append(cmd.args, "--new-branch")
 	}
 }
