@@ -3,7 +3,6 @@ package hg
 import (
 	"bytes"
 	"fmt"
-	"github.com/fatih/color"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -11,6 +10,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/fatih/color"
 )
 
 type HGCommand struct {
