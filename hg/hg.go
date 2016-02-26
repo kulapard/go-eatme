@@ -78,7 +78,7 @@ func (cmd *HGCommand) RunForAll() {
 	for path := range pathChan {
 		wg.Add(1)
 		go cmd.Run(path, wg)
-		count += 1
+		count++
 	}
 
 	wg.Wait()
