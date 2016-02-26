@@ -6,3 +6,4 @@
 [![Go Report Card](http://goreportcard.com/badge/kulapard/eatme)](http://goreportcard.com/report/kulapard/eatme)
 
 Go version of https://bitbucket.org/KulaPard/eatme
+
