@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/kulapard/go-eatme/Godeps/_workspace/src/github.com/spf13/cobra"
+	"github.com/spf13/cobra"
 	"github.com/kulapard/go-eatme/hg"
 )
 
