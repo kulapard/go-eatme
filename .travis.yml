@@ -5,4 +5,4 @@ go:
   - tip
 
 env:
-  -  GO15VENDOREXPERIMENT='1'
+  - GO15VENDOREXPERIMENT='1'
