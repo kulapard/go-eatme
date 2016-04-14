@@ -1,7 +1,7 @@
 VERSION=$(TRAVIS_TAG)
 NAME=eatme
 
-#all: mac64 linux64 win64
+all: mac64 linux64 win64
 
 mac64:
 	GOOS=darwin GOARCH=amd64 go build -o _build/$(NAME)_$(VERSION)_darwin_amd64/$(NAME)
