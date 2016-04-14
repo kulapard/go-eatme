@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/kulapard/eatme/Godeps/_workspace/src/github.com/spf13/cobra"
-	"github.com/kulapard/eatme/hg"
+	"github.com/kulapard/go-eatme/Godeps/_workspace/src/github.com/spf13/cobra"
+	"github.com/kulapard/go-eatme/hg"
 )
 
 func main() {
