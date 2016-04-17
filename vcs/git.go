@@ -18,6 +18,8 @@ func (cmd GitUpdate) Execute(path string) {
 
 	if cmd.Branch != "" {
 		args = append(args, cmd.Branch)
+	} else {
+		args = append(args, "HEAD")
 	}
 
 	systemCmd := exec.Command("git", args...)
