@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/fatih/color/vendor/github.com/mattn/go-colorable"
+	"github.com/mattn/go-colorable"
 	"github.com/mattn/go-isatty"
 )
 
