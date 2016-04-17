@@ -46,6 +46,8 @@ func (cmd CliCommand) GetVcsCommand(sign string) vcs.VcsCommand {
 			return vcs.GitPullUpdate{Branch: cmd.Branch}
 		case "branch":
 			return vcs.GitBranch{}
+		case "fetch":
+			return vcs.GitFetch{}
 		}
 	}
 	return nil

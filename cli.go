@@ -9,40 +9,48 @@ func main() {
 		Use:   "eatme",
 		Short: "pull + update",
 		Run: func(cmd *cobra.Command, args []string) {
-			pullUpdateCmd := CliCommand{Name: "pull + update", Branch: branch}
-			RunRecursively(pullUpdateCmd)
+			c := CliCommand{Name: "pull + update", Branch: branch}
+			RunRecursively(c)
 		},
 	}
 	var cmdUpdate = &cobra.Command{
 		Use:   "update",
 		Short: "only update",
 		Run: func(cmd *cobra.Command, args []string) {
-			updateCmd := CliCommand{Name: "update", Branch: branch}
-			RunRecursively(updateCmd)
+			c := CliCommand{Name: "update", Branch: branch}
+			RunRecursively(c)
 		},
 	}
 	var cmdPull = &cobra.Command{
 		Use:   "pull",
 		Short: "only pull",
 		Run: func(cmd *cobra.Command, args []string) {
-			pullCmd := CliCommand{Name: "pull"}
-			RunRecursively(pullCmd)
+			c := CliCommand{Name: "pull"}
+			RunRecursively(c)
 		},
 	}
 	var cmdPush = &cobra.Command{
 		Use:   "push",
 		Short: "only push",
 		Run: func(cmd *cobra.Command, args []string) {
-			pushCmd := CliCommand{Name: "push"}
-			RunRecursively(pushCmd)
+			c := CliCommand{Name: "push"}
+			RunRecursively(c)
 		},
 	}
 	var cmdBranch = &cobra.Command{
 		Use:   "branch",
 		Short: "show current branch",
 		Run: func(cmd *cobra.Command, args []string) {
-			pushCmd := CliCommand{Name: "branch"}
-			RunRecursively(pushCmd)
+			c := CliCommand{Name: "branch"}
+			RunRecursively(c)
+		},
+	}
+	var cmdFetch = &cobra.Command{
+		Use:   "fetch",
+		Short: "run 'git fetch'",
+		Run: func(cmd *cobra.Command, args []string) {
+			c := CliCommand{Name: "fetch"}
+			RunRecursively(c)
 		},
 	}
 
@@ -52,5 +60,6 @@ func main() {
 	EatMeCmd.AddCommand(cmdPull)
 	EatMeCmd.AddCommand(cmdPush)
 	EatMeCmd.AddCommand(cmdBranch)
+	EatMeCmd.AddCommand(cmdFetch)
 	EatMeCmd.Execute()
 }

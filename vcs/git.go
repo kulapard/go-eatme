@@ -12,6 +12,8 @@ type GitPullUpdate struct {
 }
 type GitBranch struct {
 }
+type GitFetch struct {
+}
 
 func (cmd GitUpdate) Execute(path string) {
 	args := []string{"-C", path, "checkout"}
@@ -39,6 +41,12 @@ func (cmd GitPullUpdate) Execute(path string) {
 
 func (cmd GitBranch) Execute(path string) {
 	args := []string{"-C", path, "rev-parse", "--abbrev-ref", "HEAD"}
+	systemCmd := exec.Command("git", args...)
+	execCommand(path, systemCmd)
+}
+
+func (cmd GitFetch) Execute(path string) {
+	args := []string{"-C", path, "fetch", "--tags", "--prune"}
 	systemCmd := exec.Command("git", args...)
 	execCommand(path, systemCmd)
 }
