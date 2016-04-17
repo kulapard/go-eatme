@@ -90,25 +90,23 @@ func findRepositories(root string, pathChan chan vcsPath) {
 			return nil
 		}
 
-		if info.IsDir() {
-			switch info.Name() {
-			case ".hg", ".git":
-				sign := info.Name()
-				dir, _ := filepath.Split(path)
-				absDir, err := filepath.Abs(dir)
-				if err != nil {
-					color.Red(err.Error())
-					return nil
-				}
-				// ignore hidden directories
-				matched, _ := regexp.MatchString("/\\.", absDir)
-				if matched {
-					return nil
-				}
-
-				pathChan <- vcsPath{Path: absDir, Sign: sign}
-
+		switch info.Name() {
+		case ".hg", ".git":
+			sign := info.Name()
+			dir, _ := filepath.Split(path)
+			absDir, err := filepath.Abs(dir)
+			if err != nil {
+				color.Red(err.Error())
+				return nil
 			}
+			// ignore hidden directories
+			matched, _ := regexp.MatchString("/\\.", absDir)
+			if matched {
+				return nil
+			}
+
+			pathChan <- vcsPath{Path: absDir, Sign: sign}
+
 		}
 
 		return nil
