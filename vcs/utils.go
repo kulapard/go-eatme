@@ -8,29 +8,25 @@ import (
 	"github.com/fatih/color"
 )
 
-func printCommand(cmd *exec.Cmd) {
-	color.Yellow("%s\n", strings.Join(cmd.Args, " "))
-	//fmt.Printf("==> Executing: %s\n", strings.Join(cmd.Args, " "))
+func stringCommand(cmd *exec.Cmd) string {
+	return color.YellowString("%s\n", strings.Join(cmd.Args, " "))
 }
 
-func printError(err error) {
+func stringError(err error) string {
 	if err != nil {
-		color.Red(fmt.Sprintf("%s\n", err.Error()))
-		//os.Stderr.WriteString(fmt.Sprintf("==> Error: %s\n", err.Error()))
+		return color.RedString(fmt.Sprintf("%s\n", err.Error()))
 	}
+	return ""
 }
 
-func printOutput(outs []byte) {
+func stringOutput(outs []byte) string {
 	if len(outs) > 0 {
-		fmt.Printf("%s\n", string(outs))
-		//fmt.Printf("==> Output: %s\n", string(outs))
+		return fmt.Sprintf("%s\n", string(outs))
 	}
+	return ""
 }
 
 func execCommand(path string, c *exec.Cmd) {
 	output, err := c.CombinedOutput()
-	color.Green(path)
-	printCommand(c)
-	printError(err)
-	printOutput(output)
+	fmt.Printf("%s\n%s%s%s", color.GreenString(path), stringCommand(c), stringError(err), stringOutput(output))
 }

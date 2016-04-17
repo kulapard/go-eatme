@@ -19,16 +19,6 @@
 			"revisionTime": "2014-10-17T20:07:13Z"
 		},
 		{
-			"checksumSHA1": "R/aUb9v7CVo3RjR1+0JsmmGcCWs=",
-			"path": "github.com/kulapard/go-eatme",
-			"revision": "677b4db1c06195517952faea6d22c97b8152fa9c",
-			"revisionTime": "2016-04-17T12:11:33Z"
-		},
-		{
-			"path": "github.com/kulapard/go-eatme/vcs",
-			"revision": "677b4db1c06195517952faea6d22c97b8152fa9c"
-		},
-		{
 			"checksumSHA1": "rCffFCN6TpDAN3Jylyo8RFzhQ9E=",
 			"path": "github.com/mattn/go-colorable",
 			"revision": "9cbef7c35391cca05f15f8181dc0b18bc9736dbb",
