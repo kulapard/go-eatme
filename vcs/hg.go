@@ -12,6 +12,9 @@ type HgPullUpdate struct {
 }
 type HgBranch struct {
 }
+type HgPush struct {
+	Branch string
+}
 
 func (cmd HgUpdate) Execute(path string) {
 	args := []string{"update", "--repository", path}
@@ -36,6 +39,17 @@ func (cmd HgPullUpdate) Execute(path string) {
 
 func (cmd HgBranch) Execute(path string) {
 	args := []string{"branch", "--repository", path}
+	systemCmd := exec.Command("hg", args...)
+	execCommand(path, systemCmd)
+}
+
+func (cmd HgPush) Execute(path string) {
+	args := []string{"push", "--repository", path}
+
+	if cmd.Branch != "" {
+		args = append(args, "--branch", cmd.Branch)
+	}
+
 	systemCmd := exec.Command("hg", args...)
 	execCommand(path, systemCmd)
 }

@@ -15,7 +15,7 @@ func main() {
 	}
 	var cmdUpdate = &cobra.Command{
 		Use:   "update",
-		Short: "only update",
+		Short: "run git checkout/hg update",
 		Run: func(cmd *cobra.Command, args []string) {
 			c := CliCommand{Name: "update", Branch: branch}
 			RunRecursively(c)
@@ -23,7 +23,7 @@ func main() {
 	}
 	var cmdPull = &cobra.Command{
 		Use:   "pull",
-		Short: "only pull",
+		Short: "run git/hg pull",
 		Run: func(cmd *cobra.Command, args []string) {
 			c := CliCommand{Name: "pull"}
 			RunRecursively(c)
@@ -31,9 +31,9 @@ func main() {
 	}
 	var cmdPush = &cobra.Command{
 		Use:   "push",
-		Short: "only push",
+		Short: "run git/hg push",
 		Run: func(cmd *cobra.Command, args []string) {
-			c := CliCommand{Name: "push"}
+			c := CliCommand{Name: "push", Branch: branch}
 			RunRecursively(c)
 		},
 	}
@@ -47,7 +47,7 @@ func main() {
 	}
 	var cmdFetch = &cobra.Command{
 		Use:   "fetch",
-		Short: "run 'git fetch'",
+		Short: "run git fetch",
 		Run: func(cmd *cobra.Command, args []string) {
 			c := CliCommand{Name: "fetch"}
 			RunRecursively(c)

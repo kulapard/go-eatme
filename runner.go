@@ -30,6 +30,8 @@ func (cmd CliCommand) GetVcsCommand(sign string) vcs.VcsCommand {
 			return vcs.HgPull{}
 		case "update":
 			return vcs.HgUpdate{Branch: cmd.Branch}
+		case "push":
+			return vcs.HgPush{Branch: cmd.Branch}
 		case "pull + update":
 			return vcs.HgPullUpdate{Branch: cmd.Branch}
 		case "branch":
@@ -42,6 +44,8 @@ func (cmd CliCommand) GetVcsCommand(sign string) vcs.VcsCommand {
 			return vcs.GitPull{}
 		case "update":
 			return vcs.GitUpdate{Branch: cmd.Branch}
+		case "push":
+			return vcs.GitPush{Branch: cmd.Branch}
 		case "pull + update":
 			return vcs.GitPullUpdate{Branch: cmd.Branch}
 		case "branch":
@@ -51,6 +55,11 @@ func (cmd CliCommand) GetVcsCommand(sign string) vcs.VcsCommand {
 		}
 	}
 	return nil
+}
+
+func execVcsCmd(vcsCmd vcs.VcsCommand, path string, wg *sync.WaitGroup) {
+	vcsCmd.Execute(path)
+	wg.Done()
 }
 
 func RunRecursively(cmd CliCommand) {
@@ -65,10 +74,7 @@ func RunRecursively(cmd CliCommand) {
 		vcsCmd := cmd.GetVcsCommand(p.Sign)
 		if vcsCmd != nil {
 			wg.Add(1)
-			go func(path string, wg *sync.WaitGroup) {
-				vcsCmd.Execute(p.Path)
-				wg.Done()
-			}(p.Path, wg)
+			go execVcsCmd(vcsCmd, p.Path, wg)
 			count++
 		}
 	}
