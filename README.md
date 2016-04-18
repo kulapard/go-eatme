@@ -1,4 +1,4 @@
-# EatMe
+# GoEatMe
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/kulapard/eatme/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/kulapard/go-eatme.svg?branch=master)](https://travis-ci.org/kulapard/go-eatme)
