@@ -8,11 +8,15 @@ Go version of https://github.com/kulapard/eatme
 
 ## Установка ##
 ### OS X ###
+Using [Homebrew](http://brew.sh/)
 ```
 brew install https://raw.githubusercontent.com/kulapard/go-eatme/master/go-eatme.rb
 ```
 ### Linux ###
-TODO
+Using [Linuxbrew](http://linuxbrew.sh/)
+```
+brew install https://raw.githubusercontent.com/kulapard/go-eatme/master/go-eatme.rb
+```
 
 ### Windows ###
 TODO
