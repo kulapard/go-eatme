@@ -6,3 +6,19 @@
 
 Go version of https://github.com/kulapard/eatme
 
+## Установка ##
+### OS X ###
+```
+brew install https://raw.githubusercontent.com/kulapard/go-eatme/master/go-eatme.rb
+```
+### Linux ###
+TODO
+
+### Windows ###
+TODO
+
+## Запуск ##
+```
+eatme COMMAND
+```
+
