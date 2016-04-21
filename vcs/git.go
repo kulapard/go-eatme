@@ -38,6 +38,7 @@ func (cmd GitPull) Execute(path string) {
 }
 
 func (cmd GitPullUpdate) Execute(path string) {
+	GitFetch{}.Execute(path)
 	GitUpdate{Branch: cmd.Branch}.Execute(path)
 	GitPull{}.Execute(path)
 }
