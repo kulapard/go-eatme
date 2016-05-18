@@ -1,9 +1,9 @@
 class GoEatme < Formula
   desc ""
   homepage ""
-  url "https://github.com/kulapard/go-eatme/archive/0.1.1.tar.gz"
-  version "0.1.1"
-  sha256 "bf56b17606921ca2cf483b87385cbca98721ee0322d32a0a621b24d0adb55252"
+  url "https://github.com/kulapard/go-eatme/archive/0.1.2.tar.gz"
+  version "0.1.2"
+  sha256 "efcf18fa186e4037725d5d610aff10c755201588ea62e223a4b632b78f18c379"
 
   depends_on "go" => :build
 
