@@ -15,6 +15,7 @@ import (
 type CliCommand struct {
 	Name   string
 	Branch string
+	All    bool
 }
 
 type vcsPath struct {
@@ -45,7 +46,7 @@ func (cmd CliCommand) GetVcsCommand(sign string) vcs.VcsCommand {
 		case "update":
 			return vcs.GitUpdate{Branch: cmd.Branch}
 		case "push":
-			return vcs.GitPush{Branch: cmd.Branch}
+			return vcs.GitPush{Branch: cmd.Branch, All: cmd.All}
 		case "pull + update":
 			return vcs.GitPullUpdate{Branch: cmd.Branch}
 		case "branch":

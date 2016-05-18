@@ -4,6 +4,7 @@ import "github.com/spf13/cobra"
 
 func main() {
 	var branch string
+	var all bool
 
 	var EatMeCmd = &cobra.Command{
 		Use:   "eatme",
@@ -33,7 +34,7 @@ func main() {
 		Use:   "push",
 		Short: "run git/hg push",
 		Run: func(cmd *cobra.Command, args []string) {
-			c := CliCommand{Name: "push", Branch: branch}
+			c := CliCommand{Name: "push", Branch: branch, All: all}
 			RunRecursively(c)
 		},
 	}
@@ -55,6 +56,7 @@ func main() {
 	}
 
 	EatMeCmd.PersistentFlags().StringVarP(&branch, "branch", "b", "", "Branch or Tag name")
+	cmdPush.PersistentFlags().BoolVarP(&all, "all", "a", false, "Push all branches")
 
 	EatMeCmd.AddCommand(cmdUpdate)
 	EatMeCmd.AddCommand(cmdPull)

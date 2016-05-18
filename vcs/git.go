@@ -16,6 +16,7 @@ type GitFetch struct {
 }
 type GitPush struct {
 	Branch string
+	All    bool
 }
 
 func (cmd GitUpdate) Execute(path string) {
@@ -60,7 +61,7 @@ func (cmd GitPush) Execute(path string) {
 
 	if cmd.Branch != "" {
 		args = append(args, "origin", cmd.Branch)
-	} else {
+	} else if cmd.All {
 		args = append(args, "--all")
 	}
 
