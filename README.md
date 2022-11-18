@@ -4,7 +4,7 @@
 [![Build Status](https://github.com/kulapard/go-eatme/actions/workflows/release.yml/badge.svg)](https://github.com/kulapard/go-eatme/actions/workflows/release.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/kulapard/go-eatme)](https://goreportcard.com/report/github.com/kulapard/go-eatme)
 
-Simple tool to manage multiple git/hg repositories at once.
+Simple tool to manage multiple git/hg repositories at once. It goes through all subdirectories recursively and concurrently execute specified command in all af them.
 
 ## Install ##
 Using [Homebrew](http://brew.sh/) (OS X / Linux)
