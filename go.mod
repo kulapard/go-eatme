@@ -1,17 +1,16 @@
-module cli
+module github.com/kulapard/go-eatme
 
 go 1.19
 
 require (
-	github.com/fatih/color v0.0.0-20160317093153-533cd7fd8a85
-	github.com/kulapard/go-eatme v0.0.0-20160518150233-d9eac245488d
-	github.com/spf13/cobra v0.0.0-20160403140835-4c05eb1145f1
+	github.com/fatih/color v1.13.0
+	github.com/spf13/cobra v1.6.1
 )
 
 require (
-	github.com/inconshreveable/mousetrap v1.0.0 // indirect
-	github.com/mattn/go-colorable v0.0.0-20160220075935-9cbef7c35391 // indirect
-	github.com/mattn/go-isatty v0.0.0-20151211000621-56b76bdf51f7 // indirect
-	github.com/spf13/pflag v0.0.0-20160413144353-8f6a28b09165 // indirect
-	golang.org/x/sys v0.0.0-20160415135844-f64b50fbea64 // indirect
+	github.com/inconshreveable/mousetrap v1.0.1 // indirect
+	github.com/mattn/go-colorable v0.1.9 // indirect
+	github.com/mattn/go-isatty v0.0.14 // indirect
+	github.com/spf13/pflag v1.0.5 // indirect
+	golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c // indirect
 )
