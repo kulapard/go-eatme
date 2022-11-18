@@ -4,24 +4,35 @@
 [![Build Status](https://github.com/kulapard/go-eatme/actions/workflows/release.yml/badge.svg)](https://github.com/kulapard/go-eatme/actions/workflows/release.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/kulapard/go-eatme)](https://goreportcard.com/report/github.com/kulapard/go-eatme)
 
-Go version of https://github.com/kulapard/eatme
+Simple tool to manage multiple git/hg repositories at once.
 
 ## Install ##
-### OS X / Linux ###
-Using [Homebrew](http://brew.sh/)
-```
+Using [Homebrew](http://brew.sh/) (OS X / Linux)
+```shell
 brew install kulapard/tap/eatme
 ```
 
 ## Update ##
-### OS X / Linux ###
-Using [Homebrew](http://brew.sh/)
-```
+Using [Homebrew](http://brew.sh/) (OS X / Linux)
+```shell
 brew upgrade kulapard/tap/eatme
 ```
 
-## Run ##
+## Usage ##
+```shell
+eatme [options] [command]
 ```
-eatme COMMAND
+By default it runs `fetch` + `pull` + `update` commands at once.
+To specify branch use `-b`/`--branch` option:
+```shell
+eatme -b foo/bar
 ```
 
+| Command  |           Action           |
+|----------|----------------------------|
+| `branch` | Show current branch        |
+| `fetch`  | Run git fetch              |
+| `pull`   | Run git/hg pull            |
+| `push`   | Run git/hg push            |
+| `update` | Run git checkout/hg update |
+| `help`   | Help about any command     |
