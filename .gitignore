@@ -32,3 +32,4 @@ eatme
 
 dist/
 .idea/
+.DS_Store
