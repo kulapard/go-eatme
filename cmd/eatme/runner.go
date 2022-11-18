@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	"github.com/kulapard/go-eatme/vcs"
+	vcs "github.com/kulapard/go-eatme/internal/vcs"
 )
 
 type CliCommand struct {

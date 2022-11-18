@@ -5,7 +5,7 @@ before:
 builds:
   - id: eatme
     binary: eatme
-    main: ./cli.go
+    main: ./cmd/eatme
     ldflags:
       - -s
       - -w
