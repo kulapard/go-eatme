@@ -1,0 +1,24 @@
+# github.com/fatih/color v0.0.0-20160317093153-533cd7fd8a85
+## explicit
+github.com/fatih/color
+# github.com/inconshreveable/mousetrap v1.0.0
+## explicit
+github.com/inconshreveable/mousetrap
+# github.com/kulapard/go-eatme v0.0.0-20160518150233-d9eac245488d
+## explicit
+github.com/kulapard/go-eatme/vcs
+# github.com/mattn/go-colorable v0.0.0-20160220075935-9cbef7c35391
+## explicit
+github.com/mattn/go-colorable
+# github.com/mattn/go-isatty v0.0.0-20151211000621-56b76bdf51f7
+## explicit
+github.com/mattn/go-isatty
+# github.com/spf13/cobra v0.0.0-20160403140835-4c05eb1145f1
+## explicit
+github.com/spf13/cobra
+# github.com/spf13/pflag v0.0.0-20160413144353-8f6a28b09165
+## explicit
+github.com/spf13/pflag
+# golang.org/x/sys v0.0.0-20160415135844-f64b50fbea64
+## explicit
+golang.org/x/sys/unix
