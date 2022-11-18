@@ -3,12 +3,40 @@ before:
     - go mod tidy
     - go generate ./...
 builds:
-  - env:
+  - id: eatme
+    binary: eatme
+    main: ./cli.go
+    ldflags:
+      - -s
+      - -w
+      - -X main.version={{.Summary}}
+    mod_timestamp: '{{ .CommitTimestamp }}'
+    env:
       - CGO_ENABLED=0
     goos:
       - linux
       - windows
       - darwin
+brews:
+  - name: eatme
+    goarm: "6"
+    goamd64: v3
+    tap:
+      owner: kulapard
+      name: homebrew-tap
+      branch: master
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    url_template: "https://github.com/kulapard/go-eatme/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    commit_author:
+      name: goreleaserbot
+      email: taras+goreleaserbot@drapalyuk.com
+    commit_msg_template: "Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
+    folder: Formula
+    homepage: "https://github.com/kulapard/go-eatme"
+    description: ""
+    license: "MIT"
+    test: |
+      system "#{bin}/eatme branch"
 archives:
   - replacements:
       darwin: Darwin
@@ -22,11 +50,3 @@ snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
   sort: asc
-  filters:
-    exclude:
-      - '^docs:'
-      - '^test:'
-
-# modelines, feel free to remove those if you don't want/use them:
-# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
-# vim: set ts=2 sw=2 tw=0 fo=cnqoj
