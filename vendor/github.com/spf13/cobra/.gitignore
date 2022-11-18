@@ -1,4 +1,3 @@
-### Go template
 # Compiled Object files, Static and Dynamic libs (Shared Objects)
 *.o
 *.a
@@ -21,14 +20,5 @@ _cgo_export.*
 _testmain.go
 
 *.exe
-*.test
-*.prof
 
-# Created by .ignore support plugin (hsz.mobi)
-
-_build
-go-eatme
-eatme
-
-dist/
-.idea/
+cobra.test
