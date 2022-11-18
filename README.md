@@ -10,14 +10,14 @@ Go version of https://github.com/kulapard/eatme
 ### OS X / Linux ###
 Using [Homebrew](http://brew.sh/) (OS X) or [Linuxbrew](http://linuxbrew.sh/) (Linux)
 ```
-brew install https://raw.githubusercontent.com/kulapard/go-eatme/master/go-eatme.rb
+brew install kulapard/tap/go-eatme
 ```
 
 ## Update ##
 ### OS X / Linux ###
 Using [Homebrew](http://brew.sh/) (OS X) or [Linuxbrew](http://linuxbrew.sh/) (Linux)
 ```
-brew upgrade https://raw.githubusercontent.com/kulapard/go-eatme/master/go-eatme.rb
+brew upgrade kulapard/tap/go-eatme
 ```
 
 ## Run ##
