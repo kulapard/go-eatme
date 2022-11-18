@@ -8,16 +8,16 @@ Go version of https://github.com/kulapard/eatme
 
 ## Install ##
 ### OS X / Linux ###
-Using [Homebrew](http://brew.sh/) (OS X) or [Linuxbrew](http://linuxbrew.sh/) (Linux)
+Using [Homebrew](http://brew.sh/) (OS X / Linux)
 ```
-brew install kulapard/tap/go-eatme
+brew install kulapard/tap/eatme
 ```
 
 ## Update ##
 ### OS X / Linux ###
-Using [Homebrew](http://brew.sh/) (OS X) or [Linuxbrew](http://linuxbrew.sh/) (Linux)
+Using [Homebrew](http://brew.sh/) (OS X / Linux)
 ```
-brew upgrade kulapard/tap/go-eatme
+brew upgrade kulapard/tap/eatme
 ```
 
 ## Run ##
