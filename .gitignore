@@ -29,3 +29,7 @@ _testmain.go
 _build
 go-eatme
 eatme
+
+dist/
+.idea/
+.DS_Store
