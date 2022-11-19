@@ -1,4 +1,4 @@
-package main
+package runner
 
 import (
 	"os"
@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	vcs "github.com/kulapard/go-eatme/internal/vcs"
+	"github.com/kulapard/go-eatme/internal/vcs"
 )
 
 type CliCommand struct {
