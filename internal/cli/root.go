@@ -19,6 +19,7 @@ var rootCmd = &cobra.Command{
 		c := runner.CliCommand{Name: "pull + update", Branch: branch}
 		runner.RunRecursively(c)
 	},
+	CompletionOptions: cobra.CompletionOptions{DisableDefaultCmd: true},
 }
 
 func Execute(version string) {
