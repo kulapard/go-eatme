@@ -10,7 +10,7 @@ var cmdUpdate = &cobra.Command{
 	Short: "run git checkout/hg update",
 	Run: func(cmd *cobra.Command, args []string) {
 		c := runner.CliCommand{Name: "update", Branch: branch}
-		runner.RunRecursively(c)
+		c.RunRecursively()
 	},
 }
 

@@ -16,7 +16,7 @@ type HgPush struct {
 	Branch string
 }
 
-func (cmd HgUpdate) Execute(path string) {
+func (cmd *HgUpdate) Execute(path string) {
 	args := []string{"update", "--repository", path}
 	if cmd.Branch != "" {
 		args = append(args, "--rev", cmd.Branch)
@@ -26,24 +26,27 @@ func (cmd HgUpdate) Execute(path string) {
 	execCommand(path, systemCmd)
 }
 
-func (cmd HgPull) Execute(path string) {
+func (cmd *HgPull) Execute(path string) {
 	args := []string{"pull", "--repository", path}
 	systemCmd := exec.Command("hg", args...)
 	execCommand(path, systemCmd)
 }
 
-func (cmd HgPullUpdate) Execute(path string) {
-	HgPull{}.Execute(path)
-	HgUpdate{Branch: cmd.Branch}.Execute(path)
+func (cmd *HgPullUpdate) Execute(path string) {
+	pull := HgPull{}
+	update := HgUpdate{Branch: cmd.Branch}
+
+	pull.Execute(path)
+	update.Execute(path)
 }
 
-func (cmd HgBranch) Execute(path string) {
+func (cmd *HgBranch) Execute(path string) {
 	args := []string{"branch", "--repository", path}
 	systemCmd := exec.Command("hg", args...)
 	execCommand(path, systemCmd)
 }
 
-func (cmd HgPush) Execute(path string) {
+func (cmd *HgPush) Execute(path string) {
 	args := []string{"push", "--repository", path}
 
 	if cmd.Branch != "" {

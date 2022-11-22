@@ -1,5 +1,5 @@
 package vcs
 
-type VcsCommand interface {
+type Command interface {
 	Execute(path string)
 }

@@ -17,7 +17,7 @@ var rootCmd = &cobra.Command{
 	Short: "pull + update",
 	Run: func(cmd *cobra.Command, args []string) {
 		c := runner.CliCommand{Name: "pull + update", Branch: branch}
-		runner.RunRecursively(c)
+		c.RunRecursively()
 	},
 	CompletionOptions: cobra.CompletionOptions{DisableDefaultCmd: true},
 }

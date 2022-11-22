@@ -10,7 +10,7 @@ var cmdFetch = &cobra.Command{
 	Short: "run git fetch",
 	Run: func(cmd *cobra.Command, args []string) {
 		c := runner.CliCommand{Name: "fetch"}
-		runner.RunRecursively(c)
+		c.RunRecursively()
 	},
 }
 

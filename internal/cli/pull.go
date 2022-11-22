@@ -10,7 +10,7 @@ var cmdPull = &cobra.Command{
 	Short: "run git/hg pull",
 	Run: func(cmd *cobra.Command, args []string) {
 		c := runner.CliCommand{Name: "pull"}
-		runner.RunRecursively(c)
+		c.RunRecursively()
 	},
 }
 

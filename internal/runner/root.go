@@ -23,47 +23,51 @@ type vcsPath struct {
 	Sign string
 }
 
-func (cmd CliCommand) GetVcsCommand(sign string) vcs.VcsCommand {
-	switch {
-	case sign == ".hg":
+func (cmd *CliCommand) GetVcsCommand(sign string) vcs.Command {
+	switch sign {
+	case ".hg":
 		switch cmd.Name {
 		case "pull":
-			return vcs.HgPull{}
+			return &vcs.HgPull{}
 		case "update":
-			return vcs.HgUpdate{Branch: cmd.Branch}
+			return &vcs.HgUpdate{Branch: cmd.Branch}
 		case "push":
-			return vcs.HgPush{Branch: cmd.Branch}
+			return &vcs.HgPush{Branch: cmd.Branch}
 		case "pull + update":
-			return vcs.HgPullUpdate{Branch: cmd.Branch}
+			return &vcs.HgPullUpdate{Branch: cmd.Branch}
 		case "branch":
-			return vcs.HgBranch{}
+			return &vcs.HgBranch{}
 
 		}
-	case sign == ".git":
+	case ".git":
 		switch cmd.Name {
 		case "pull":
-			return vcs.GitPull{}
+			return &vcs.GitPull{}
 		case "update":
-			return vcs.GitUpdate{Branch: cmd.Branch}
+			return &vcs.GitUpdate{Branch: cmd.Branch}
 		case "push":
-			return vcs.GitPush{Branch: cmd.Branch, All: cmd.All}
+			return &vcs.GitPush{Branch: cmd.Branch, All: cmd.All}
 		case "pull + update":
-			return vcs.GitPullUpdate{Branch: cmd.Branch}
+			return &vcs.GitPullUpdate{Branch: cmd.Branch}
 		case "branch":
-			return vcs.GitBranch{}
+			return &vcs.GitBranch{}
 		case "fetch":
-			return vcs.GitFetch{}
+			return &vcs.GitFetch{}
 		}
 	}
 	return nil
 }
 
-func execVcsCmd(vcsCmd vcs.VcsCommand, path string, wg *sync.WaitGroup) {
+func (cmd *CliCommand) RunRecursively() {
+	runRecursively(cmd)
+}
+
+func execVcsCmd(vcsCmd vcs.Command, path string, wg *sync.WaitGroup) {
 	vcsCmd.Execute(path)
 	wg.Done()
 }
 
-func RunRecursively(cmd CliCommand) {
+func runRecursively(cmd *CliCommand) {
 	t := time.Now()
 	wg := new(sync.WaitGroup)
 	pathChan := make(chan vcsPath)
@@ -90,10 +94,9 @@ func findRepositories(root string, pathChan chan vcsPath) {
 		if !info.IsDir() {
 			return nil
 		}
-
-		switch info.Name() {
+		sign := info.Name()
+		switch sign {
 		case ".hg", ".git":
-			sign := info.Name()
 			dir, _ := filepath.Split(path)
 			absDir, err := filepath.Abs(dir)
 			if err != nil {

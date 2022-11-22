@@ -10,7 +10,7 @@ var cmdBranch = &cobra.Command{
 	Short: "show current branch",
 	Run: func(cmd *cobra.Command, args []string) {
 		c := runner.CliCommand{Name: "branch"}
-		runner.RunRecursively(c)
+		c.RunRecursively()
 	},
 }
 
