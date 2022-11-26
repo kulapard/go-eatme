@@ -89,8 +89,13 @@ func runRecursively(cmd *CliCommand) {
 }
 
 func findRepositories(root string, pathChan chan vcsPath) {
+	// Close the channel when we're done.
 	defer close(pathChan)
+
 	visit := func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
 		if !info.IsDir() {
 			return nil
 		}
@@ -110,11 +115,10 @@ func findRepositories(root string, pathChan chan vcsPath) {
 			}
 
 			pathChan <- vcsPath{Path: absDir, Sign: sign}
-
 		}
-
 		return nil
 	}
 
+	// Walk the file tree.
 	filepath.Walk(root, visit)
 }
