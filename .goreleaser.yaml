@@ -33,7 +33,7 @@ brews:
     commit_msg_template: "Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
     folder: Formula
     homepage: "https://github.com/kulapard/go-eatme"
-    description: ""
+    description: "Simple tool to manage multiple git/hg repositories at once. It goes through all subdirectories recursively and concurrently execute specified command in all af them."
     license: "MIT"
     test: |
       system "#{bin}/eatme branch"
