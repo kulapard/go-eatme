@@ -1,5 +1,12 @@
-name: Test
-on: [ push ]
+name: Pull requests
+
+on:
+  pull_request:
+    branches: [ master ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
 
 jobs:
   build_and_test:
@@ -17,7 +24,7 @@ jobs:
       - name: Display Go version
         run: go version
       - name: Install dependencies
-        run: go get .
+        run: go get -v ./...
       - name: Build
         run: go build -v ./...
       - name: Test with the Go CLI
