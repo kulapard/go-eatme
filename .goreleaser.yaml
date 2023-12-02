@@ -21,7 +21,7 @@ brews:
   - name: eatme
     goarm: "6"
     goamd64: v3
-    tap:
+    repository:
       owner: kulapard
       name: homebrew-tap
       branch: master
