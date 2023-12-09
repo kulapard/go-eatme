@@ -1,9 +1,9 @@
 package main
 
 var (
-	version = "unknown-local-build"
+	revision = "unknown"
 )
 
 func main() {
-	Execute(version)
+	Execute(revision)
 }

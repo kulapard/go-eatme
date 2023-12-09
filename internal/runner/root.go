@@ -120,5 +120,5 @@ func findRepositories(root string, pathChan chan vcsPath) {
 	}
 
 	// Walk the file tree.
-	filepath.Walk(root, visit)
+	filepath.Walk(root, visit) // nolint
 }

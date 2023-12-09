@@ -1,45 +1,69 @@
+version: 1
+
 before:
   hooks:
     - go mod tidy
-    - go generate ./...
+
 builds:
   - id: eatme
     binary: eatme
-    main: ./cmd/eatme
-    ldflags:
-      - -s
-      - -w
-      - -X main.version={{.Summary}}
-    mod_timestamp: '{{ .CommitTimestamp }}'
+    dir: cmd/eatme
+    ldflags: "-s -w -X main.revision={{.Tag}}-{{.ShortCommit}}-{{.CommitDate}}"
     env:
       - CGO_ENABLED=0
     goos:
       - linux
       - windows
       - darwin
+    goarch:
+      - amd64
+      - arm
+      - arm64
+    ignore:
+      - goos: freebsd
+        goarch: arm
+      - goos: freebsd
+        goarch: arm64
+      - goos: windows
+        goarch: arm
+      - goos: windows
+        goarch: arm64
+
 brews:
-  - name: eatme
-    goarm: "6"
-    goamd64: v3
+  - name: gol
     repository:
       owner: kulapard
       name: homebrew-tap
       branch: master
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-    url_template: "https://github.com/kulapard/go-eatme/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
     commit_author:
-      name: goreleaserbot
-      email: taras+goreleaserbot@drapalyuk.com
-    commit_msg_template: "Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
+      name: Taras Drapalyuk
+      email: taras@drapalyuk.com
+    commit_msg_template: "Brew formula update for `{{ .ProjectName }}` version `{{ .Tag }}`"
     folder: Formula
     homepage: "https://github.com/kulapard/go-eatme"
     description: "Simple tool to manage multiple git/hg repositories at once. It goes through all subdirectories recursively and concurrently execute specified command in all af them."
     license: "MIT"
     test: |
       system "#{bin}/eatme branch"
-checksum:
-  name_template: 'checksums.txt'
-snapshot:
-  name_template: "{{ incpatch .Version }}-next"
+
+archives:
+  - format: tar.gz
+    # this name template makes the OS and Arch compatible with the results of `uname`.
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    # use zip for windows archives
+    format_overrides:
+      - goos: windows
+        format: zip
+
 changelog:
   sort: asc
+
+checksum:
+  name_template: 'checksums.txt'
