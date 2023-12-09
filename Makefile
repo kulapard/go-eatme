@@ -11,9 +11,9 @@ REV=$(if $(filter --,$(GIT_REV)),latest,$(GIT_REV)) # fallback to latest if not 
 all: lint test build release
 
 build:
-	cd cmd/gol && go build -ldflags "-X main.revision=$(REV) -s -w" -o ../../.bin/gol.$(REV)
-	cp .bin/gol.$(REV) .bin/gol
-	.bin/gol --version
+	cd cmd/eatme && go build -ldflags "-X main.revision=$(REV) -s -w" -o ../../.bin/eatme.$(REV)
+	cp .bin/eatme.$(REV) .bin/eatme
+	.bin/eatme --version
 
 release:
 	@echo release to dist/
