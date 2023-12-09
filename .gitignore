@@ -33,3 +33,4 @@ eatme
 dist/
 .idea/
 .DS_Store
+.bin

@@ -30,7 +30,7 @@ builds:
         goarch: arm64
 
 brews:
-  - name: gol
+  - name: eatme
     repository:
       owner: kulapard
       name: homebrew-tap
