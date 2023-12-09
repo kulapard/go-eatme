@@ -46,3 +46,7 @@ eatme -b foo/bar
 | `push`   | Run git/hg push            |
 | `update` | Run git checkout/hg update |
 | `help`   | Help about any command     |
+
+## License ##
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
