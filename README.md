@@ -32,7 +32,7 @@ brew upgrade eatme
 eatme [options] [command]
 ```
 
-By default it runs `fetch` + `pull` + `update` commands at once.
+By default, it runs `fetch` + `pull` + `update` commands at once.
 To specify branch use `-b`/`--branch` option:
 
 ```shell
