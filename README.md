@@ -22,7 +22,8 @@ brew install kulapard/tap/eatme
 Using [Homebrew](http://brew.sh/) (OS X / Linux)
 
 ```shell
-brew upgrade kulapard/tap/eatme
+brew update
+brew upgrade eatme
 ```
 
 ## Usage ##
