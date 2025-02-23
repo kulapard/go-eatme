@@ -34,3 +34,4 @@ dist/
 .idea/
 .DS_Store
 .bin
+.vscode/
