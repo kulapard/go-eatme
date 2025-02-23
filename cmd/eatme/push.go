@@ -8,8 +8,11 @@ import (
 var cmdPush = &cobra.Command{
 	Use:   "push",
 	Short: "run git/hg push",
+	Long: `Push commits to remote repository.
+Supports both git and hg repositories.
+Use --all flag to push all branches.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		c := runner.CliCommand{Name: "push", Branch: branch, All: all}
+		c := runner.CliCommand{Name: "push", Branch: cfg.branch, All: cfg.all}
 		c.RunRecursively()
 	},
 }
