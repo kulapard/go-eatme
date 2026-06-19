@@ -29,7 +29,7 @@ builds:
       - goos: windows
         goarch: arm64
 
-brews:
+homebrew_casks:
   - name: eatme
     repository:
       owner: kulapard
@@ -39,13 +39,16 @@ brews:
     commit_author:
       name: Taras Drapalyuk
       email: taras@drapalyuk.com
-    commit_msg_template: "Brew formula update for `{{ .ProjectName }}` version `{{ .Tag }}`"
-    directory: Formula
+    commit_msg_template: "Brew cask update for `{{ .ProjectName }}` version `{{ .Tag }}`"
     homepage: "https://github.com/kulapard/go-eatme"
     description: "Simple tool to manage multiple git/hg repositories at once. It goes through all subdirectories recursively and concurrently execute specified command in all af them."
     license: "MIT"
-    test: |
-      system "#{bin}/eatme branch"
+    hooks:
+      post:
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/eatme"]
+          end
 
 archives:
   - formats: [ 'tar.gz' ]
