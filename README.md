@@ -14,7 +14,7 @@ concurrently execute specified command in all af them.
 Using [Homebrew](http://brew.sh/) (OS X / Linux)
 
 ```shell
-brew install kulapard/tap/eatme
+brew install --cask kulapard/tap/eatme
 ```
 
 ## Update ##
