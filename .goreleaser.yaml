@@ -43,12 +43,13 @@ homebrew_casks:
     homepage: "https://github.com/kulapard/go-eatme"
     description: "Simple tool to manage multiple git/hg repositories at once. It goes through all subdirectories recursively and concurrently execute specified command in all af them."
     license: "MIT"
-    hooks:
-      post:
-        install: |
-          if OS.mac?
-            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/eatme"]
-          end
+    # GoReleaser hooks render the deprecated `postflight` stanza, so emit `postflight_steps` directly.
+    custom_block: |
+      postflight_steps do
+        on_macos do
+          run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "eatme"], chdir: "."
+        end
+      end
 
 archives:
   - formats: [ 'tar.gz' ]
